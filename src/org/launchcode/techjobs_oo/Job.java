@@ -24,7 +24,11 @@ public class Job {
 
     public Job(String newName, Employer newEmployer, Location newLocation, PositionType newPositionType, CoreCompetency newCoreCompetency) {
         this();
-        this.name = newName;
+        if(newName == null || newName == "") {
+            this.name = "Data not available";
+        } else {
+            this.name = newName;
+        }
         this.employer = newEmployer;
         this.location = newLocation;
         this.positionType = newPositionType;
