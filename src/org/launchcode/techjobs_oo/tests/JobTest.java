@@ -15,6 +15,7 @@ public class JobTest {
     static Job fullJob2;
     static String jobString;
     static String emptyJobString;
+    static Location emptyField;
 
     @BeforeClass
     public static void createJobObjects() {
@@ -27,6 +28,7 @@ public class JobTest {
                 new PositionType("Quality control"), new CoreCompetency("Persistence"));
         jobString = fullJob.toString();
         emptyJobString = job1.toString();
+        emptyField = new Location("");
 
     }
 
@@ -71,23 +73,24 @@ public class JobTest {
         String[] jobStringByLines = jobString.split("\n");
 
         // jobStringByLines[0] is empty
-        assertTrue(jobStringByLines[1].equals("ID: " + fullJob.getId()));
-        assertTrue(jobStringByLines[2].equals("Name: " + fullJob.getName()));
-        assertTrue(jobStringByLines[3].equals("Employer: " + fullJob.getEmployer()));
-        assertTrue(jobStringByLines[4].equals("Location: " + fullJob.getLocation()));
-        assertTrue(jobStringByLines[5].equals("Position Type: " + fullJob.getPositionType()));
-        assertTrue(jobStringByLines[6].equals("Core Competency: " + fullJob.getCoreCompetency()));
+        assertEquals("ID: " + fullJob.getId(), jobStringByLines[1]);
+        assertEquals("Name: " + fullJob.getName(), jobStringByLines[2]);
+        assertEquals("Employer: " + fullJob.getEmployer(), jobStringByLines[3]);
+        assertEquals("Location: " + fullJob.getLocation(), jobStringByLines[4]);
+        assertEquals("Position Type: " + fullJob.getPositionType(), jobStringByLines[5]);
+        assertEquals("Core Competency: " + fullJob.getCoreCompetency(), jobStringByLines[6]);
     }
 
     @Test
     public void toStringShouldListDataNotAvailableForEmptyFields() {
-        String[] jobStringByLines = emptyJobString.split("\n");
-
-        assertTrue(jobStringByLines[2].equals("Name: Data not available"));
-        assertTrue(jobStringByLines[3].equals("Employer: Data not available"));
-        assertTrue(jobStringByLines[4].equals("Location: Data not available"));
-        assertTrue(jobStringByLines[5].equals("Position Type: Data not available"));
-        assertTrue(jobStringByLines[6].equals("Core Competency: Data not available"));
+        // Only needs to be tested for one field as all fields share common base class constructor
+        assertEquals("Data not available", emptyField.toString());
     }
+
+    @Test
+    public void toStringShouldReturnErrorStringForEmptyJob() {
+        assertEquals("OOPS! This job does not seem to exist.", job1.toString());
+    }
+
 
 }

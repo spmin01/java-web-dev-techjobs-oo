@@ -49,13 +49,17 @@ public class Job {
 
     @Override
     public String toString() {
+        if (this.getEmployer() == null && this.getLocation() == null && this.getPositionType() == null
+                && this.getCoreCompetency() == null) {
+            return "OOPS! This job does not seem to exist.";
+        }
         String jobString = '\n' +
                 "ID: " + this.getId() + '\n' +
-                "Name: " + ((this.name != null && this.name != "") ? this.getName() : "Data not available") + '\n' +
-                "Employer: " + (this.employer != null ? this.getEmployer() : "Data not available") + '\n' +
-                "Location: " + (this.location != null ? this.getLocation() : "Data not available") + '\n' +
-                "Position Type: " + (this.positionType != null ? this.getPositionType() : "Data not available") + '\n' +
-                "Core Competency: " + (this.coreCompetency != null ? this.getCoreCompetency() : "Data not available") +
+                "Name: " + this.getName() + '\n' +
+                "Employer: " + this.getEmployer() + '\n' +
+                "Location: " + this.getLocation() + '\n' +
+                "Position Type: " + this.getPositionType() + '\n' +
+                "Core Competency: " + this.getCoreCompetency() +
                 '\n';
         return jobString;
     }

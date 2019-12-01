@@ -14,7 +14,11 @@ public abstract class JobField {
 
     public JobField(String newValue) {
         this();
-        this.value = newValue;
+        if(newValue == "" || newValue == null) {
+            this.value = "Data not available";
+        } else {
+            this.value = newValue;
+        }
     }
 
     @Override
