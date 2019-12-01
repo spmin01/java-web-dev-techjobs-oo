@@ -22,7 +22,7 @@ public class Job {
         nextId++;
     }
 
-    public Job(String newName, Employer newEmployer, Location newLocation, PositionType  newPositionType, CoreCompetency newCoreCompetency) {
+    public Job(String newName, Employer newEmployer, Location newLocation, PositionType newPositionType, CoreCompetency newCoreCompetency) {
         this();
         this.name = newName;
         this.employer = newEmployer;
@@ -47,6 +47,18 @@ public class Job {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        String jobString = '\n' +
+                "ID: " + this.getId() + '\n' +
+                "Name: " + ((this.name != null && this.name != "") ? this.getName() : "Data not available") + '\n' +
+                "Employer: " + (this.employer != null ? this.getEmployer() : "Data not available") + '\n' +
+                "Location: " + (this.location != null ? this.getLocation() : "Data not available") + '\n' +
+                "Position Type: " + (this.positionType != null ? this.getPositionType() : "Data not available") + '\n' +
+                "Core Competency: " + (this.coreCompetency != null ? this.getCoreCompetency() : "Data not available") +
+                '\n';
+        return jobString;
+    }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
